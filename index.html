@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mal Unified Payment Platform Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 32px 20px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      border-bottom: 1px solid #334155;
+      padding: 48px 0;
+    }
+    h1, h2, h3 {
+      color: #f8fafc;
+    }
+    .muted {
+      color: #94a3b8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .pill {
+      display: inline-block;
+      background: #0ea5e9;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid #334155;
+      padding: 12px;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background: #334155;
+    }
+    code, pre {
+      background: #020617;
+      color: #cbd5e1;
+      border-radius: 10px;
+    }
+    pre {
+      padding: 14px;
+      overflow-x: auto;
+    }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      border-top: 1px solid #334155;
+      margin-top: 40px;
+      padding-top: 20px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <h1>Unified Payment Data Pipeline</h1>
+      <p class="muted">
+        Senior Data Engineer Assessment submission for Mal — cross-product canonical payment model,
+        validation, contract versioning, and migration strategy.
+      </p>
+      <div style="margin-top:16px;">
+        <span class="pill">Cards</span>
+        <span class="pill">Transfers</span>
+        <span class="pill">Bill Payments</span>
+        <span class="pill">Canonical Schema</span>
+        <span class="pill">Validation</span>
+        <span class="pill">v1 → v2 Migration</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <h2>Problem</h2>
+    <p>
+      Three product squads produced payment events with different field names, structures, and rules.
+      This project standardizes them into one reusable payment model for downstream analytics,
+      reconciliation, risk monitoring, and product reporting.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Input Sources</h3>
+        <ul>
+          <li>Cards CSV</li>
+          <li>Transfers CSV</li>
+          <li>Bill Payments CSV</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Processing</h3>
+        <ul>
+          <li>Schema mapping</li>
+          <li>Field standardization</li>
+          <li>Validation checks</li>
+          <li>Error capture</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Outputs</h3>
+        <ul>
+          <li>Unified JSON</li>
+          <li>Unified Parquet</li>
+          <li>Validation error log</li>
+          <li>Run summary</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Canonical Payment Schema</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>event_id</td><td>Unique payment event identifier</td></tr>
+        <tr><td>payment_type</td><td>card / transfer / bill_payment</td></tr>
+        <tr><td>customer_id</td><td>Customer identifier</td></tr>
+        <tr><td>amount</td><td>Transaction amount</td></tr>
+        <tr><td>currency</td><td>ISO currency code</td></tr>
+        <tr><td>event_timestamp</td><td>Standardized event timestamp</td></tr>
+        <tr><td>status</td><td>Normalized status</td></tr>
+        <tr><td>payment_method</td><td>Rail or method used</td></tr>
+        <tr><td>source_system</td><td>Originating squad/system</td></tr>
+        <tr><td>contract_version</td><td>Data contract version</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Example Unified Record</h2>
+    <pre>{
+  "event_id": "card_1001",
+  "payment_type": "card",
+  "customer_id": "CUST_001",
+  "amount": 245.75,
+  "currency": "AED",
+  "event_timestamp": "2026-04-21T10:15:00Z",
+  "status": "SUCCESS",
+  "payment_method": "DEBIT_CARD",
+  "source_system": "cards_squad",
+  "contract_version": "v1"
+}</pre>
+
+    <h2>Validation Rules</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Checks</h3>
+        <ul>
+          <li>Mandatory fields present</li>
+          <li>Amount is positive</li>
+          <li>Currency format valid</li>
+          <li>Timestamp parsable</li>
+          <li>Status normalized</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Error Handling</h3>
+        <ul>
+          <li>Invalid rows are not dropped silently</li>
+          <li>Errors written to <code>validation_errors.jsonl</code></li>
+          <li>Run summary captures valid vs invalid counts</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Contract Versioning</h2>
+    <p>
+      The pipeline includes a simple data contract evolution example from <strong>v1</strong> to <strong>v2</strong>,
+      showing how canonical entities can change in a controlled way while keeping backward migration clear.
+    </p>
+
+    <h2>Project Files</h2>
+    <ul>
+      <li><a href="./README.md">README</a></li>
+      <li><a href="./Migration_Architecture_Strategy.pdf">Architecture & Migration Strategy PDF</a></li>
+      <li><a href="./output/unified_payments.json">Unified payments JSON</a></li>
+      <li><a href="./output/run_summary.json">Run summary</a></li>
+      <li><a href="./output/validation_errors.jsonl">Validation errors</a></li>
+    </ul>
+
+    <h2>Business Relevance for Mal</h2>
+    <p>
+      This design supports a fast-growing digital banking setup where multiple squads move quickly,
+      but shared data entities must still stay consistent for finance, compliance, analytics, and customer reporting.
+    </p>
+
+    <div class="footer">
+      Built for Mal Senior Data Engineer Assessment • Repository owner: Shiraz Hussain
+    </div>
+  </div>
+</body>
+</html>
