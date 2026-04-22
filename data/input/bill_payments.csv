@@ -1,0 +1,4 @@
+payment_id,customer_no,bill_amount,currency,paid_on,payment_status,payment_method,invoice_no,biller,debit_account,creditor_account,channel_name
+BP001,CUST002,320.40,AED,2026-04-19T19:00:00Z,success,ACCOUNT,INV9001,Etisalat,AC002,ET001,mobile_app
+BP002,CUST003,110.00,AED,2026-04-20T07:20:00Z,success,CARD,INV9002,ADDC,AC003,AD001,mobile_app
+BP003,CUST007,75.25,AE,2026-04-20T11:05:00Z,success,WALLET,INV9003,Du,AC007,DU001,web

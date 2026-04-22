@@ -1,0 +1,4 @@
+transfer_uuid,user_id,amount_value,currency_code,created_at,state,rail,beneficiary_ref,from_account,to_account
+TR001,CUST001,1500.00,AED,2026-04-19T09:30:00Z,success,A2A,BNF100,AC001,AC9001
+TR002,CUST005,275.50,AED,2026-04-20T13:10:00Z,pending,IP,BNF101,AC005,AC9002
+TR003,CUST006,700.00,AED,2026-04-20T16:20:00Z,failed,SWIFT,BNF102,AC006,AC9003

@@ -1,0 +1,14 @@
+{
+  "valid_record_count": 8,
+  "error_count": 2,
+  "by_payment_type": {
+    "TRANSFER": 3,
+    "CARD": 3,
+    "BILL_PAYMENT": 2
+  },
+  "by_status": {
+    "SUCCESS": 5,
+    "FAILED": 2,
+    "PENDING": 1
+  }
+}

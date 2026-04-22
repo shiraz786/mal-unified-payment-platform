@@ -1,0 +1,5 @@
+txn_id,cust_id,amt_aed,ccy,txn_ts,txn_status,card_type,merchant_ref,merchant_name,account_id,card_pan_masked,channel,country
+1001,CUST001,245.75,AED,2026-04-19T10:14:00Z,success,debit,MRC1001,Carrefour,AC001,****4567,pos,AE
+1002,CUST002,89.90,AED,2026-04-19T12:22:00Z,failed,credit,MRC1002,Amazon.ae,AC002,****8877,ecommerce,AE
+1003,CUST003,520.00,USD,2026-04-20T08:45:00Z,success,credit,MRC1003,Booking.com,AC003,****1029,ecommerce,GB
+1004,CUST004,-15.00,AED,2026-04-20T09:00:00Z,success,debit,MRC1004,Nando's,AC004,****7731,pos,AE
